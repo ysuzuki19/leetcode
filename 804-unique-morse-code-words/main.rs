@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+use std::collections::HashSet;
 
 const morse: &[&str] = &[".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."];
 
@@ -17,12 +17,11 @@ fn transform(word: String) -> String {
 
 impl Solution {
   pub fn unique_morse_representations(words: Vec<String>) -> i32 {
-    let mut map: HashMap<String, i64> = HashMap::new();
+    let mut set: HashSet<String> = HashSet::new();
     for word in words {
       let series = transform(word);
-      let entry = map.entry(series).or_insert(0);
-      *entry += 1;
+      set.insert(series);
     }
-    map.len() as i32
+    set.len() as i32
   }
 }
